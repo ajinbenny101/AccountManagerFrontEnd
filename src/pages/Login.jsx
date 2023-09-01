@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -32,42 +33,50 @@ const Login = () => {
   };
 
   return (
-    <div className="add-post-container">
-      <form className="addUserForm" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Username: </label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+    <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-gradient">
+      <div className="col-md-6">
+        <form className="border p-4 shadow-sm">
+          <h2 className="mb-4 text-center" style={{ color: "#6f42c1" }}>
+            Log In
+          </h2>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">
+              Username:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Password: </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password:
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        <button type="submit" className="btn btn-primary">
-          Log In
-        </button>
-      </form>
-      <p>
-        don't have an account click{" "}
-        <span>
-          <a class="nav-link" href="/register">
-            here
-          </a>
-        </span>
-      </p>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ backgroundColor: "#007bff" }}
+          >
+            Log In
+          </button>
+        </form>
+        <p className="mt-3">
+          Don't have an account? Click <a href="/register" className="text-primary">here</a>.
+        </p>
+      </div>
     </div>
   );
 };
