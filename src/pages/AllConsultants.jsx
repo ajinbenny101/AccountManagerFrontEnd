@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AllConsultants = () => {
   const [consultants, setConsultants] = useState([]);
 
   useEffect(() => {
     const fetchConsultants = async () => {
-      const response = await axios.get(
-        "http://localhost:8088/api/v1/consultants"
-      );
-      setConsultants(response.data);
-      console.log(response);
+      try {
+        const response = await axios.get(
+          "http://localhost:8088/api/v1/consultants"
+        );
+        setConsultants(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchConsultants();
   }, []);
@@ -30,18 +34,14 @@ const AllConsultants = () => {
           </thead>
           <tbody>
             {consultants.map((consultant) => (
-              <tr
-                key={consultant.id}
-                onClick={() => {
-                }}
-              >
+              <tr key={consultant.id}>
                 <td>
-                  <a
-                    href={`/consultants/${consultant.id}`}
-                    className="text-decoration-none text-dark"
-                  >
-                    {consultant.firstName} {consultant.lastName}
-                  </a>
+                <Link
+                  to={`/consultants/${consultant.id}`}
+                  className="text-decoration-none text-dark"
+                >
+                  {consultant.firstName} {consultant.lastName}
+                </Link>
                 </td>
                 <td>{consultant.phoneNumber}</td>
                 <td>{consultant.fdmEmail}</td>

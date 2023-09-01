@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import Header from "./Components/header";
 import AllConsultants from "./pages/AllConsultants";
+import ConsultantDetails from "./pages/ConsultantDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 
