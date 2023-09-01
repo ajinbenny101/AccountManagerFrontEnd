@@ -18,7 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<AllConsultants />} />
-          <Route path="consultants/:id" />
+          <Route path="consultants/:id" element={<ConsultantDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="accessdenied" element={<AccessDenied />} />
         </Routes>
