@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center vh-100 bg-gradient">
       <div className="col-md-6">
-        <form className="border p-4 shadow-sm">
+        <form className="border p-4 shadow-sm" onSubmit={handleSubmit}>
           <h2 className="mb-4 text-center" style={{ color: "#6f42c1" }}>
             Log In
           </h2>
