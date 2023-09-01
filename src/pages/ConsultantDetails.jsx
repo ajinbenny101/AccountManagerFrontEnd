@@ -29,7 +29,7 @@ const ConsultantDetails = () => {
         <p>Phone: {consultant.phoneNumber}</p>
         <p>Email: {consultant.fdmEmail}</p>
         <p>Stream: {consultant.stream && consultant.stream.stream}</p>
-        {/* Display other details as needed */}
+        
       </div>
     </div>
   );
