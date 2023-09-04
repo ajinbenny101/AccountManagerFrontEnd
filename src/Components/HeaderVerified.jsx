@@ -1,6 +1,14 @@
-const Header = () => {
-    return (
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+import React from "react";
+
+const HeaderVerified = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.reload();
+  };
+
+  return (
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
           Account Manager
@@ -29,8 +37,8 @@ const Header = () => {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login">
-                Log In
+              <a class="nav-link active" onClick={handleClick}>
+                Log Out
               </a>
             </li>
             <li class="nav-item dropdown">
@@ -76,12 +84,10 @@ const Header = () => {
               </a>
             </li>
           </ul>
-          
         </div>
       </div>
     </nav>
-    );
-  };
-  
-  export default Header;
-  
+  );
+};
+
+export default HeaderVerified;

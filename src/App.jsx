@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import Header from "./Components/header";
 import AllConsultants from "./pages/AllConsultants";
 import ConsultantDetails from "./pages/ConsultantDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -11,13 +10,14 @@ import AccessDenied from "./pages/AccessDenied";
 import SearchForm from "./Components/SearchForm";
 import SearchResults from "./pages/SearchResults";
 import Home from "./pages/Home";
+import HeaderAuth from "./Components/HeaderAuth";
 
 
 function App() {
   return (
     <Router>
       <div>
-        <Header />
+        <HeaderAuth />
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/consultants" element={<AllConsultants />} />
