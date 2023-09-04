@@ -1,35 +1,44 @@
 import React, { useState } from "react";
-import SearchResults from "../pages/SearchResults";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const SearchForm = () => {
-  const [parameter, setParameter] = useState("");
+  const [selectedStream, setSelectedStream] = useState("");
   const navigate = useNavigate();
 
+  const streamOptions = [
+    { streamCode: "BA", stream: "Business Analysis" },
+    { streamCode: "BI", stream: "Business Intelligence" },
+    { streamCode: "DE", stream: "Data Engineering" },
+    { streamCode: "PMO", stream: "Project Management" },
+    { streamCode: "SD", stream: "Software Development and Engineering" },
+    { streamCode: "ST", stream: "Software Testing" },
+    { streamCode: "TO", stream: "Technical Operations" },
+    { streamCode: "CL", stream: "Cloud Computing" },
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
-    navigate("/searchresults", {state:{parameter:{parameter}}})
+    if (selectedStream) {
+      navigate(`/searchresults/${selectedStream}`);
+    }
+  };
+
+  const handleSelectChange = (e) => {
+    setSelectedStream(e.target.value);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>seach: </label>
-      <input
-        type="search"
-        id="search parameter"
-        value={parameter}
-        onChange={(e) => setParameter(e.target.value)}
-      ></input>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        style={{ backgroundColor: "#007bff" }}
-        onClick={handleSubmit}
-      >
-        Search
-      </button>
+      <label>Search by Stream: </label>
+      <select value={selectedStream} onChange={handleSelectChange}>
+        <option value="">Select a Stream</option>
+        {streamOptions.map((stream) => (
+          <option key={stream.streamCode} value={stream.streamCode}>
+            {stream.stream}
+          </option>
+        ))}
+      </select>
+      <button type="submit">Search</button>
     </form>
   );
 };
