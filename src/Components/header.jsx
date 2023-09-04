@@ -46,8 +46,8 @@ const Header = () => {
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="#">
-                    Action
+                  <a class="dropdown-item" href="/search">
+                    Search By Stream
                   </a>
                 </li>
                 <li>
