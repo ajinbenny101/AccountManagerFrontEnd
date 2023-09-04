@@ -8,6 +8,8 @@ import ConsultantDetails from "./pages/ConsultantDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import AccessDenied from "./pages/AccessDenied";
+import SearchForm from "./Components/SearchForm";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,6 +23,8 @@ function App() {
           <Route path="consultants/:id" element={<ConsultantDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="accessdenied" element={<AccessDenied />} />
+          <Route path="search" element={<SearchForm/>}/>
+          <Route path="searchresults" element={<SearchResults/>}/>
         </Routes>
       </div>
     </Router>

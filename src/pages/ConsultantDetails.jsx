@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ConsultantDetails = () => {
   const { id } = useParams();
   const [consultant, setConsultant] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchConsultantDetails = async () => {
@@ -77,10 +78,12 @@ const ConsultantDetails = () => {
                     {consultant.placements.map((placement) => (
                       <React.Fragment key={placement.id}>
                         <li>
-                          <p>Name of Company: {placement.nameOfCompany || "N/A"}</p>
+                          <p>
+                            Name of Company: {placement.nameOfCompany || "N/A"}
+                          </p>
                           <p>Job Title: {placement.jobTitle || "N/A"}</p>
                         </li>
-                        <hr className="my-4" /> 
+                        <hr className="my-4" />
                       </React.Fragment>
                     ))}
                   </ul>
@@ -93,7 +96,9 @@ const ConsultantDetails = () => {
               <th scope="row">Interests</th>
               <td>
                 {consultant.interests &&
-                  consultant.interests.map((interest) => interest.interest).join(", ")}
+                  consultant.interests
+                    .map((interest) => interest.interest)
+                    .join(", ")}
               </td>
             </tr>
           </tbody>
