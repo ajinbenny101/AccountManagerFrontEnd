@@ -12,9 +12,8 @@ import SearchForm from "./Components/SearchForm";
 import SearchResults from "./pages/SearchResults";
 import Home from "./pages/Home";
 
-function App() {
-  const [count, setCount] = useState(0);
 
+function App() {
   return (
     <Router>
       <div>
@@ -25,8 +24,8 @@ function App() {
           <Route path="consultants/:id" element={<ConsultantDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="accessdenied" element={<AccessDenied />} />
-          <Route path="search" element={<SearchForm/>}/>
-          <Route path="searchresults" element={<SearchResults/>}/>
+          <Route path="search" element={<SearchForm />} />
+          <Route path="searchresults/:stream" element={<SearchResults />} />
         </Routes>
       </div>
     </Router>
