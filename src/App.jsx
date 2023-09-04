@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import AccessDenied from "./pages/AccessDenied";
 import SearchForm from "./Components/SearchForm";
 import SearchResults from "./pages/SearchResults";
+import Home from "./pages/Home";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -19,7 +20,8 @@ function App() {
       <div>
         <Header />
         <Routes>
-          <Route path="/" element={<AllConsultants />} />
+          <Route path="/" element={<Home/>}/>
+          <Route path="/consultants" element={<AllConsultants />} />
           <Route path="consultants/:id" element={<ConsultantDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="accessdenied" element={<AccessDenied />} />
