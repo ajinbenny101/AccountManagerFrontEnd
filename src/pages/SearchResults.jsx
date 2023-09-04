@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 
-const AllConsultants = () => {
+const SearchResults = () => {
   const [consultants, setConsultants] = useState([]);
   const token = localStorage.getItem("token");
   const [userLoggedIn, setUserLoggedIn] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const fetchConsultants = async () => {
+    const searchFunction = async () => {
       try {
+        console.log(location.state.parameter.parameter);
         let response = await axios.get(
-          "http://localhost:8088/api/v1/consultants",
+          `http://localhost:8088/api/v1/consultants/findConsultantsByStream/${location.state.parameter.parameter}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
-            }
+            },
           }
         );
+        console.log(response.data);
         setConsultants(response.data);
-        console.log(response);
       } catch (error) {
-        if (error.response.status === 401) {
+        /*if (error.response.status === 401) {
           navigate("/accessdenied");
-        }
+        }*/
       }
     };
-    fetchConsultants();
+    searchFunction();
   }, []);
 
   return (
@@ -66,4 +69,4 @@ const AllConsultants = () => {
   );
 };
 
-export default AllConsultants;
+export default SearchResults;
