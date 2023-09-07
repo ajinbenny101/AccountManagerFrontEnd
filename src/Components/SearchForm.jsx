@@ -19,7 +19,7 @@ const SearchForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (selectedStream) {
-      navigate(`/searchresults/${selectedStream}`);
+      navigate("/searchresults", {state:{parameter:{selectedStream}}});
     }
   };
 
