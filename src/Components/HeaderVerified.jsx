@@ -50,7 +50,7 @@ const HeaderVerified = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown
+                Searches
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
@@ -58,7 +58,8 @@ const HeaderVerified = () => {
                     Search By Stream
                   </a>
                 </li>
-                <li>
+              </ul>
+                {/* <li>
                   <a class="dropdown-item" href="#">
                     Another action
                   </a>
@@ -70,8 +71,8 @@ const HeaderVerified = () => {
                   <a class="dropdown-item" href="#">
                     Something else here
                   </a>
-                </li>
-              </ul>
+                </li> 
+              
             </li>
             <li class="nav-item">
               <a
@@ -81,7 +82,7 @@ const HeaderVerified = () => {
                 aria-disabled="true"
               >
                 Disabled
-              </a>
+              </a>*/}
             </li>
           </ul>
         </div>

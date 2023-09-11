@@ -73,9 +73,9 @@ const Login = () => {
             Log In
           </button>
         </form>
-        <p className="mt-3">
+        {/* <p className="mt-3">
           Don't have an account? Click <a href="/register" className="text-primary">here</a>.
-        </p>
+        </p> */}
       </div>
     </div>
   );
