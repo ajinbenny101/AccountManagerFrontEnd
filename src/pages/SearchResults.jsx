@@ -8,38 +8,13 @@ const SearchResults = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const searchFunction = async () => {
-      try {
-        if (location.state.parameter.selectedStream) {
-          // Existing code for stream search
-          let response = await axios.get(
-            `http://localhost:8088/api/v1/consultants/findConsultantsByStream/${location.state.parameter.selectedStream}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setConsultants(response.data);
-        } else if (location.state.parameter.selectedSkills && location.state.parameter.selectedSkills.length) {
-          // New code for skills search
-          let response = await axios.post(
-            `http://localhost:8088/api/v1/consultants/findConsultantsBySkills`,
-            { skills: location.state.parameter.selectedSkills },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setConsultants(response.data);
-        }
-      } catch (error) {
-        // Error handling (expand as required)
-      }
-    };
-    searchFunction();
-  }, [token]);
+    setConsultants(location.state.parameter.data1);
+    console.log(location.state.parameter);
+  }, [consultants]);
+
+  while (!consultants) {
+    return <div></div>;
+  }
 
   return (
     <div className="container py-4">
