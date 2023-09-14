@@ -44,8 +44,8 @@ const HeaderLoggedOut = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown
-              </a>
+                Searches
+         {/*      </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
                   <a class="dropdown-item" href="/search">
@@ -74,7 +74,7 @@ const HeaderLoggedOut = () => {
                 tabindex="-1"
                 aria-disabled="true"
               >
-                Disabled
+                Disabled */}
               </a>
             </li>
           </ul>

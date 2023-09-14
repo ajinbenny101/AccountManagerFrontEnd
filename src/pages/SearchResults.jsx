@@ -1,39 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const SearchResults = () => {
   const [consultants, setConsultants] = useState([]);
   const token = localStorage.getItem("token");
-  const { stream } = useParams();
   const location = useLocation();
 
   useEffect(() => {
     const searchFunction = async () => {
       try {
-        console.log(location.state.parameter.selectedStream);
-        let response = await axios.get(
-          `http://localhost:8088/api/v1/consultants/findConsultantsByStream/${location.state.parameter.selectedStream}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setConsultants(response.data);
+        if (location.state.parameter.selectedStream) {
+          // Existing code for stream search
+          let response = await axios.get(
+            `http://localhost:8088/api/v1/consultants/findConsultantsByStream/${location.state.parameter.selectedStream}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setConsultants(response.data);
+        } else if (location.state.parameter.selectedSkills && location.state.parameter.selectedSkills.length) {
+          // New code for skills search
+          let response = await axios.post(
+            `http://localhost:8088/api/v1/consultants/findConsultantsBySkills`,
+            { skills: location.state.parameter.selectedSkills },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setConsultants(response.data);
+        }
       } catch (error) {
-        /*if (error.response.status === 401) {
-          navigate("/accessdenied");
-        }*/
+        // Error handling (expand as required)
       }
     };
     searchFunction();
-  }, [stream, token]);
+  }, [token]);
 
   return (
     <div className="container py-4">
-      <h1 className="display-4 mb-4">All Consultants true</h1>
+      <h1 className="display-4 mb-4">All Consultants</h1>
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
