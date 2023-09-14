@@ -65,9 +65,9 @@ const ConsultantDetails = () => {
             <tr>
               <th scope="row">Skills</th>
               <td>
-                {consultant.skills && consultant.skills.length > 0
-                  ? consultant.skills[0].skillName
-                  : "N/A"}
+              {consultant.skills && consultant.skills.length > 0
+              ? `${consultant.skills[0].skillName} - ${consultant.skills[0].ability}`
+                : "N/A"}
               </td>
             </tr>
             <tr>

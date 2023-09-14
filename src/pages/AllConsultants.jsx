@@ -32,7 +32,7 @@ const AllConsultants = () => {
 
   return (
     <div className="container py-4">
-      <h1 className="display-4 mb-4">All Consultants true</h1>
+      <h1 className="display-4 mb-4">All Consultants</h1>
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
