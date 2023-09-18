@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
 
 const SearchForm = () => {
   const [selectedStream, setSelectedStream] = useState(null);
@@ -9,6 +13,83 @@ const SearchForm = () => {
   // const [selectedSkills, setSelectedSkills] = useState("");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [requestdata, setRequestData] = useState([]);
+  const listtest = [
+    "Adobe Creative Suite",
+    "Adobe Illustrator",
+    "Adobe Photoshop",
+    "Adaptability",
+    "Agile Framework",
+    "Apple Keynote",
+    "Big Data Engineering",
+    "Business Analytics",
+    "Business Mapping",
+    "C#",
+    "C++",
+    "Canva",
+    "Communication Skills",
+    "Creativity Skills",
+    "CSS",
+    "Critical Thinking",
+    "Data Cleaning",
+    "Data Management",
+    "Data Mining",
+    "Data Modelling",
+    "Data Visualisation",
+    "Data Wrangling",
+    "Databricks",
+    "Decision-making",
+    "DevOps",
+    "ETL Process",
+    "Figma",
+    "Git",
+    "GitHub",
+    "GitLab",
+    "Google Analytics",
+    "HTML",
+    "Hadoop/Hive Ecosystem",
+    "Interpersonal Skills",
+    "Java",
+    "JavaScript",
+    "Jira",
+    "Kanban board",
+    "Leadership",
+    "Microsoft 365",
+    "Microsoft Excel",
+    "Microsoft Excel VBA",
+    "Microsoft PowerPoint",
+    "Microsoft Power Automate",
+    "Microsoft Power Apps",
+    "MS PowerShell",
+    "MySQL",
+    "Network Security",
+    "Negotiation",
+    "Organisation",
+    "Persuasion",
+    "Problem Solving",
+    "Product Delivery",
+    "Project Management",
+    "Python",
+    "R",
+    "Requirement Gathering Technique",
+    "Risk-analysis",
+    "SQL",
+    "SQL Developer Oracle",
+    "SQL Server",
+    "SWOT Analysis",
+    "Scala",
+    "Scrum",
+    "Scrum Master",
+    "Stakeholder Engagement",
+    "Stakeholder Management",
+    "Tableau",
+    "Teamwork",
+    "Time Management",
+    "UI/UX Design",
+    "UNIX",
+    "VSCode",
+    "Waterfall",
+  ];
 
   const streamOptions = [
     { streamCode: "BA", stream: "Business Analyst" },
@@ -34,45 +115,44 @@ const SearchForm = () => {
       navigate("/searchresults", {
         state: { parameter: { data1 } },
       });
-      /*} else if (location.state.parameter.selectedSkills && location.state.parameter.selectedSkills.length) {
-        // New code for skills search
-        let response = await axios.post(
-          `http://localhost:8088/api/v1/consultants/findConsultantsBySkills`,
-          { skills: location.state.parameter.selectedSkills },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setConsultants(response.data);
-      } */
     } catch (error) {
       console.log(error);
     }
   };
 
-  /* const skillOptions = [ 
-    {
-    "id": 1,
-    "ability": "Beginner",
-    "skillType": "Technical",
-    "skillName": "Project Management"
-}, 
-];*/
+  const searchSkills = async () => {
+    try {
+      let response = await axios.post(
+        "http://localhost:8088/api/v1/consultants/findConsultantsBySkills",
+        {
+          skills: requestdata,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+      const data1 = response.data;
+      navigate("/searchresults", {
+        state: { parameter: { data1 } },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleStreamSearch = (e) => {
     e.preventDefault();
     searchFunction();
   };
 
-  /* const handleSkillSearch = (e) => {
+  const handleSkillsSearch = (e) => {
     e.preventDefault();
-    if (selectedSkills.length) {
-      navigate("/searchresults", { state: { parameter: { selectedSkills } } });
-    }
+    searchSkills();
   };
- */
+
   const handleSelectChange = (e) => {
     setSelectedStream(e.target.value);
   };
@@ -80,7 +160,7 @@ const SearchForm = () => {
   return (
     <div>
       {/* Stream Search */}
-      <form onSubmit={handleStreamSearch}>
+      <form onSubmit={handleStreamSearch} className="mb-3">
         <label>Search by Stream: </label>
         <select
           value={selectedStream}
@@ -96,19 +176,28 @@ const SearchForm = () => {
         <button type="submit">Search by Stream</button>
       </form>
 
-      {/* Skills Search */}
-      {/*  <form onSubmit={handleSkillSearch}>
-        <label>Select Skills: </label>
-        <select multiple value={selectedSkills} onChange={(e) => setSelectedSkills([...e.target.selectedOptions].map(option => option.value))}>
-  {skillOptions.map((skill) => (
-    <option key={skill.id} value={skill.skillName}>
-      {skill.skillName}
-    </option>
-  ))}
-</select>
-
-        <button type="submit">Search by Skills</button>
-      </form>*/}
+      <form onSubmit={handleSkillsSearch}>
+        <Autocomplete
+          multiple
+          limitTags={2}
+          id="multiple-limit-tags"
+          options={listtest}
+          getOptionLabel={(option) => option}
+          defaultValue={[listtest[0]]}
+          onChange={(event, value) => {
+            setRequestData(value);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="skills"
+              placeholder="start typing..."
+            />
+          )}
+          sx={{ width: "500px" }}
+        />
+        <button type="submit">Search by Skill</button>
+      </form>
     </div>
   );
 };
