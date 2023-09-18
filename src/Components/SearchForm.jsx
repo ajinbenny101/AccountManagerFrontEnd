@@ -115,49 +115,44 @@ const SearchForm = () => {
       navigate("/searchresults", {
         state: { parameter: { data1 } },
       });
-      /*} else if (location.state.parameter.selectedSkills && location.state.parameter.selectedSkills.length) {
-        // New code for skills search
-        let response = await axios.post(
-          `http://localhost:8088/api/v1/consultants/findConsultantsBySkills`,
-          { skills: location.state.parameter.selectedSkills },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setConsultants(response.data);
-      } */
     } catch (error) {
       console.log(error);
     }
   };
 
-  /* const skillOptions = [ 
-    {
-    "id": 1,
-    "ability": "Beginner",
-    "skillType": "Technical",
-    "skillName": "Project Management"
-}, 
-];*/
+  const searchSkills = async () => {
+    try {
+      let response = await axios.post(
+        "http://localhost:8088/api/v1/consultants/findConsultantsBySkills",
+        {
+          skills: requestdata,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+      const data1 = response.data;
+      navigate("/searchresults", {
+        state: { parameter: { data1 } },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleStreamSearch = (e) => {
     e.preventDefault();
     searchFunction();
   };
 
-  const handleSkillSearch = (e) => {
+  const handleSkillsSearch = (e) => {
     e.preventDefault();
+    searchSkills();
   };
 
-  /* const handleSkillSearch = (e) => {
-    e.preventDefault();
-    if (selectedSkills.length) {
-      navigate("/searchresults", { state: { parameter: { selectedSkills } } });
-    }
-  };
- */
   const handleSelectChange = (e) => {
     setSelectedStream(e.target.value);
   };
@@ -189,8 +184,9 @@ const SearchForm = () => {
           options={listtest}
           getOptionLabel={(option) => option}
           defaultValue={[listtest[0]]}
-          value={requestdata}
-          onChange={(e) => setRequestData(e.target.value)}
+          onChange={(event, value) => {
+            setRequestData(value);
+          }}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -200,20 +196,8 @@ const SearchForm = () => {
           )}
           sx={{ width: "500px" }}
         />
+        <button type="submit">Search by Skill</button>
       </form>
-      {/* Skills Search */}
-      {/*  <form onSubmit={handleSkillSearch}>
-        <label>Select Skills: </label>
-        <select multiple value={selectedSkills} onChange={(e) => setSelectedSkills([...e.target.selectedOptions].map(option => option.value))}>
-  {skillOptions.map((skill) => (
-    <option key={skill.id} value={skill.skillName}>
-      {skill.skillName}
-    </option>
-  ))}
-</select>
-
-        <button type="submit">Search by Skills</button>
-      </form>*/}
     </div>
   );
 };
